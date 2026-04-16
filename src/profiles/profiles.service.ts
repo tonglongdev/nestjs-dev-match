@@ -27,7 +27,11 @@ export class ProfilesService {
   ];
 
   create(createProfileDto: CreateProfileDto) {
-    return `This action adds a new profile name: ${createProfileDto.name}, description: ${createProfileDto.description}`;
+    return this.profiles.push({
+      id: randomUUID(),
+      name: createProfileDto.name,
+      description: createProfileDto.description,
+    });
   }
 
   findAll() {
