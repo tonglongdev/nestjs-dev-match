@@ -39,14 +39,32 @@ export class ProfilesService {
   }
 
   findOne(id: string) {
-    return this.profiles.find((profile) => profile.id === id);
+    const matchingProfile = this.profiles.find((profile) => profile.id === id);
+    return matchingProfile || null;
   }
 
   update(id: string, updateProfileDto: UpdateProfileDto) {
-    return `This action updates a #${id} profile with name: ${updateProfileDto.name}, description: ${updateProfileDto.description}`;
+    const profileIndex = this.profiles.findIndex(
+      (profile) => profile.id === id,
+    );
+    if (profileIndex === -1) {
+      return null;
+    }
+    this.profiles[profileIndex] = {
+      ...this.profiles[profileIndex],
+      ...updateProfileDto,
+      id: this.profiles[profileIndex].id,
+    };
+    return this.profiles[profileIndex];
   }
 
   remove(id: string) {
-    return `This action removes a #${id} profile`;
+    const profileIndex = this.profiles.findIndex(
+      (profile) => profile.id === id,
+    );
+    if (profileIndex === -1) {
+      return null;
+    }
+    return this.profiles.splice(profileIndex, 1);
   }
 }
