@@ -10,10 +10,10 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import type { UUID } from 'crypto';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ProfilesService } from './profiles.service';
-import type { UUID } from 'crypto';
 
 @Controller('profiles')
 export class ProfilesController {
